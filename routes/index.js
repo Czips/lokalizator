@@ -52,7 +52,7 @@ var initDb = function(callback) {
     }
 
     db = conn;
-    dbDetails.databaseName = db.databaseName;
+    dbDetails.databaseName = 'lokalizator';
     dbDetails.url = mongoURLLabel;
     dbDetails.type = 'MongoDB';
 
