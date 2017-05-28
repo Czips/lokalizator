@@ -82,6 +82,7 @@ router.post('/get', function(req,res,next){
 			res.sendStatus(404);
 		}else
 		{
+		if(docs != null && docs[0].locations != null){
 		var arrayLength = docs[0].locations.length;
 		for (var i = 0; i < arrayLength; i++) {
 		    //Do something
@@ -90,6 +91,7 @@ router.post('/get', function(req,res,next){
 			 	"locationlist" : JSON.stringify(docs[0].locations[i].points)
 				 });
 			}
+		}
 		}
 
 			res.sendStatus(404);
