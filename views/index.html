@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html> 
+<head> 
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script type="text/javascript">
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+
+  function initMap() 
+  {
+    console.log('dupa');
+    var locations = [
+      ['Bondi Beach', 50.048471, 19.947245, 4],
+      ['Coogee Beach', 50.048471, 19.947245, 5],
+      ['Cronulla Beach', 50.048471, 19.947245, 3],
+      ['Manly Beach', 50.098471, 19.927245, 2],
+      ['Maroubra Beach', 50.028471, 19.917245, 1]
+    ];
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 10,
+      center: new google.maps.LatLng(50.048471, 19.947245),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+    var infowindow = new google.maps.InfoWindow();
+
+    var marker, i;
+
+    for (i = 0; i < locations.length; i++) {  
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+        map: map
+      });
+
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          infowindow.setContent(locations[i][0]);
+          infowindow.open(map, marker);
+        }
+      })(marker, i));
+    }
+  }
+  </script>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" /> 
+  <title>Lokalizator Web</title>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8jPYbHn-VZYKedzsAeLMKAQh1BFLlLFE&callback=initMap"
+    async defer></script>
+
+</head> 
+<body>
+  <h1>Lokalizator web</h1>
+  <form>
+  <p>User: <input type="text" id="username"></p>
+  <p>Date: <input type="text" id="datepicker"></p>
+  <p><input type="submit" value="Find"></p>
+  </form>
+  <div id="map" style="width: 500px; height: 400px;"></div>
+
+</body>
+</html>

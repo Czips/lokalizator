@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h1 Lokalizator
+  p Welcome to #{title}
+
+  form#formAddUser(name="adduser",method="post",action="/get")
+    input#inputUserName(type="text", placeholder="username", name="username")
+    input#inputDate(type="text", placeholder="datepicker", name="datepicker")
+    button#btnSubmit(type="submit") submit
+
+  script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8jPYbHn-VZYKedzsAeLMKAQh1BFLlLFE&callback=initMap" async defer)
+  #map.col
+
+  input(type='hidden' id='target' value='#{locationlist}')
