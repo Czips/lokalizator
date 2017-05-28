@@ -82,7 +82,7 @@ router.post('/get', function(req,res,next){
 			res.sendStatus(404);
 		}else
 		{
-		if(docs != null && docs[0].locations != null){
+		if(docs[0] != null && docs[0].locations != null){
 		var arrayLength = docs[0].locations.length;
 		for (var i = 0; i < arrayLength; i++) {
 		    //Do something
@@ -105,7 +105,6 @@ router.post('/get', function(req,res,next){
 
 router.post('/insert', function(req,res,next){
 
-	console.log('hej', req.db);
     // Set our internal DB variable
   	if (!db) {
     initDb(function(err){});
