@@ -20,7 +20,8 @@ if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
   var mongoServiceName = process.env.DATABASE_SERVICE_NAME.toUpperCase(),
       mongoHost = process.env[mongoServiceName + '_SERVICE_HOST'],
       mongoPort = process.env[mongoServiceName + '_SERVICE_PORT'],
-      mongoDatabase = process.env[mongoServiceName + '_DATABASE'],
+      //mongoDatabase = process.env[mongoServiceName + '_DATABASE'],
+      mongoDatabase = 'lokalizator',
       mongoPassword = process.env[mongoServiceName + '_PASSWORD']
       mongoUser = process.env[mongoServiceName + '_USER'];
 
@@ -59,7 +60,7 @@ var initDb = function(callback) {
     console.log('Connected to MongoDB at: %s', mongoURL);
 });
 }
-
+initDb(function(err){});
 router.post('/get', function(req,res,next){
 	console.log('hejj');
 	var usernam = req.body.username;
