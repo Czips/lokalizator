@@ -154,69 +154,7 @@ user.then(doc =>{
     	})
     }
 });
-// });
-// 	}else
-// 	{
-// 		if(!collection.find(
-// 		{
-// 			_id: locations._id
-// 		}))
-// 		{
-// 			collection.update(
-// 		    { username: userName},
-// 		    {
-// 		        $addToSet: {locations : locations}
-// 		    },{upsert: true}, function (err, doc) {
-// 		        if (err) {
-// 		            // If it failed, return error
-// 		            res.send(403);
-// 		        }
-// 		        else {
-// 		            // And forward to success page
-// 		            res.send(200);
-// 		        }
-// 		    });
-// 		}
-// 		else
-// 		{
-// 			collection.update(
-// 		    { _id: locations._id},
-// 		    {
-// 		        locations : locations
-// 		    },{upsert: true}, function (err, doc) {
-// 		        if (err) {
-// 		            // If it failed, return error
-// 		            res.send(403);
-// 		        }
-// 		        else {
-// 		            // And forward to success page
-// 		            res.send(200);
-// 		        }
-// 		    });
-// 		}
-
-// 	}
-
-
-
-    // Submit to the DB
-    // collection.update(
-    // { username: userName},
-    // {
-    //     $addToSet: {locations : locations}
-    // },{upsert: true}, function (err, doc) {
-    //     if (err) {
-    //         // If it failed, return error
-    //         res.send(403);
-    //     }
-    //     else {
-    //         // And forward to success page
-    //         res.send(200);
-    //     }
-    // });
-
     console.log('koniec');
-    //res.send(200);
 });
 
 module.exports = router;
