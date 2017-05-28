@@ -60,7 +60,7 @@ router.post('/insert', function(req,res,next){
     var collection = db.get('locations');
     console.log('insert');
 
-let user = new Promise(function(resolve,reject){
+var user = new Promise(function(resolve,reject){
     	collection.find(
     	{username: userName},function(err,doc){
     		if(err)
@@ -73,7 +73,7 @@ let user = new Promise(function(resolve,reject){
 });
 
 
-let findLocations = new Promise( (resolve, reject) =>{
+var findLocations = new Promise( (resolve, reject) =>{
 	collection.find({ "locations.0.Date": {$eq: locations.Date}},
 		function(err,doc){
 			if(err){
