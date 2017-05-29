@@ -65,7 +65,9 @@ router.post('/get', function(req,res,next){
 	console.log('hejj');
 	var usernam = req.body.username;
 	var date = req.body.datepicker;
-
+	date = date.replace('/','');
+	date = date.replace('/','');
+	console.log(date);
 	  if (!db) {
     initDb(function(err){});
   	}

@@ -1,6 +1,7 @@
 <script>
 $(function() {
-  $("#inputDate").datepicker();
+
+  $("#inputDate").datepicker({dateFormat: "dd/mm/yy"});
   });
 
 function initMap(){
