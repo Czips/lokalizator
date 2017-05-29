@@ -84,7 +84,7 @@ router.post('/get', function(req,res,next){
 		{
 		console.log('no error');
 		var docs = out.toArray();
-		console.log(docs);
+		docs.then(function(docs){
 		if(docs[0] != null && docs[0].locations != null){
 		var arrayLength = docs[0].locations.length;
 		console.log('arrayLength: ',arrayLength);
@@ -98,8 +98,8 @@ router.post('/get', function(req,res,next){
 			}
 		}
 		}
-
-			res.sendStatus(404);
+		res.sendStatus(404);
+		});
 		}
 	});
 });
