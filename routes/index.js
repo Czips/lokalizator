@@ -210,8 +210,8 @@ user.then(doc =>{
     // 	});
     // }
 });
-    console.log('koniec');
-}
+//     console.log('koniec');
+
 });
 
 module.exports = router;
