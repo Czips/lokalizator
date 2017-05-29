@@ -117,102 +117,101 @@ router.post('/get', function(req,res,next){
     // Set our collection
     var collection = db.collection('locations');
     console.log('insert');
-	collection.insert({ip: req.ip, date: Date.now()});
-// var user = new Promise(function(resolve,reject){
-//     	collection.find(
-//     	{username: userName},function(err,doc){
-//     		if(err)
-//     		{
-//     			reject(err);
-//     		}else{
-//     			resolve(doc);
-//     		}
-//     	});
-// });
+var user = new Promise(function(resolve,reject){
+    	collection.find(
+    	{username: userName},function(err,doc){
+    		if(err)
+    		{
+    			reject(err);
+    		}else{
+    			resolve(doc);
+    		}
+    	});
+});
 
 
-// var findLocations = new Promise( (resolve, reject) =>{
-// 	collection.find({ "locations.0.Date": {$eq: locations.Date}},
-// 		function(err,doc){
-// 			if(err){
-// 				reject(err);
-// 			}else{
-// 				resolve(doc);
-// 			}
-// 		}
-// 		);
-// });
+var findLocations = new Promise( (resolve, reject) =>{
+	collection.find({ "locations.0.Date": {$eq: locations.Date}},
+		function(err,doc){
+			if(err){
+				reject(err);
+			}else{
+				resolve(doc);
+			}
+		}
+		);
+});
 
 
 
 // console.log(user);
 
-// user.then(doc =>{
-
-// 	if(doc.length ==0){
-//     	console.log('insert user');
-//     	collection.insert({
-//     		username: userName,
-//     		locations: [ locations]
-//     	},
-//     		function (err, doc) {
-// 		        if (err) {
-// 		        	console.log(err)
-// 		            // If it failed, return error
-// 		            res.send(403);
-// 		        }
-// 		        else {
-// 		        	console.log(doc)
-// 		            // And forward to success page
-// 		            res.send(200);
-// 		        }
-// 		    }
-//     	);
-//     }
-//     else
-//     {
-//     	findLocations.then(doc =>{
+user.then(doc =>{
+	console.log(doc);
+	if(doc.length ==0){
+    	console.log('insert user');
+    	collection.insert({
+    		username: userName,
+    		locations: [ locations]
+    	},
+    		function (err, doc) {
+		        if (err) {
+		        	console.log(err)
+		            // If it failed, return error
+		            res.send(403);
+		        }
+		        else {
+		        	console.log(doc)
+		            // And forward to success page
+		            res.send(200);
+		        }
+		    }
+    	);
+    }
+    // else
+    // {
+    // 	findLocations.then(doc =>{
     		
-//     		//day not found
-//     		if(doc.length ==0)
-//     		{
-//     			console.log('add locations');
-//     			collection.update({username: userName},
-//     			{$addToSet:{locations: locations}},function(err,doc){
-//     			if (err) {
-// 		        	console.log(err)
-// 		            // If it failed, return error
-// 		            res.send(403);
-// 		        }
-// 		        else {
-// 		        	console.log(doc)
-// 		            // And forward to success page
-// 		            res.send(200);
+    // 		//day not found
+    // 		if(doc.length ==0)
+    // 		{
+    // 			console.log('add locations');
+    // 			collection.update({username: userName},
+    // 			{$addToSet:{locations: locations}},function(err,doc){
+    // 			if (err) {
+		  //       	console.log(err)
+		  //           // If it failed, return error
+		  //           res.send(403);
+		  //       }
+		  //       else {
+		  //       	console.log(doc)
+		  //           // And forward to success page
+		  //           res.send(200);
 		        
-//     			}
-//     			});
-//     		}else
-//     		{
-//     			console.log('push points');
-//     			collection.update({username: userName},
-//     			{$pushAll:{ "locations.0.points": locations.points}},function(err,doc){
-//     			if (err) {
-// 		        	console.log(err)
-// 		            // If it failed, return error
-// 		            res.send(403);
-// 		        }
-// 		        else {
-// 		        	console.log(doc)
-// 		            // And forward to success page
-// 		            res.send(200);
-// 		        	}
-//     			});
-//     		}
-//     	});
-//     }
-// });
-//     console.log('koniec');
-//}
+    // 			}
+    // 			});
+    // 		}else
+    // 		{
+    // 			console.log('push points');
+    // 			collection.update({username: userName},
+    // 			{$pushAll:{ "locations.0.points": locations.points}},function(err,doc){
+    // 			if (err) {
+		  //       	console.log(err)
+		  //           // If it failed, return error
+		  //           res.send(403);
+		  //       }
+		  //       else {
+		  //       	console.log(doc)
+		  //           // And forward to success page
+		  //           res.send(200);
+		  //       	}
+    // 			});
+    // 		}
+    // 	});
+    // }
+});
+    console.log('koniec');
+}
 });
 
 module.exports = router;
