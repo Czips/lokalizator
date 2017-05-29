@@ -84,11 +84,14 @@ router.post('/get', function(req,res,next){
 		{
 		console.log('no error');
 		var docs = out.toArray();
+		console.log(docs);
 		if(docs[0] != null && docs[0].locations != null){
 		var arrayLength = docs[0].locations.length;
+		console.log('arrayLength: ',arrayLength);
 		for (var i = 0; i < arrayLength; i++) {
 		    //Do something
 			if(docs[0].locations[i].Date == date){
+				 console.log('render!');
 				 res.render('index', { 
 			 	"locationlist" : JSON.stringify(docs[0].locations[i].points)
 				 });
