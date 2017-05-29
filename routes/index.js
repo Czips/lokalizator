@@ -130,7 +130,7 @@ var user = new Promise(function(resolve,reject){
 });
 
 
-var findLocations = new Promise( (resolve, reject) =>{
+var findLocations = new Promise(function (resolve, reject){
 	collection.find({ "locations.0.Date": {$eq: locations.Date}},
 		function(err,doc){
 			if(err){
@@ -169,7 +169,7 @@ user.then(function(doc){
     }
     else
     {
-    	findLocations.then(function(doc) =>{
+    	findLocations.then(function(doc){
     		
     		//day not found
     		if(doc.length ==0)
