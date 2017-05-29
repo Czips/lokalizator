@@ -143,10 +143,9 @@ var findLocations = new Promise( (resolve, reject) =>{
 });
 
 
+console.log('start');
 
-// console.log(user);
-
-user.then(doc =>{
+user.then(function(doc){
 	console.log(doc);
 	if(doc.length ==0){
     	console.log('insert user');
@@ -168,47 +167,47 @@ user.then(doc =>{
 		    }
     	);
     }
-    // else
-    // {
-    // 	findLocations.then(doc =>{
+    else
+    {
+    	findLocations.then(function(doc) =>{
     		
-    // 		//day not found
-    // 		if(doc.length ==0)
-    // 		{
-    // 			console.log('add locations');
-    // 			collection.update({username: userName},
-    // 			{$addToSet:{locations: locations}},function(err,doc){
-    // 			if (err) {
-		  //       	console.log(err)
-		  //           // If it failed, return error
-		  //           res.send(403);
-		  //       }
-		  //       else {
-		  //       	console.log(doc)
-		  //           // And forward to success page
-		  //           res.send(200);
+    		//day not found
+    		if(doc.length ==0)
+    		{
+    			console.log('add locations');
+    			collection.update({username: userName},
+    			{$addToSet:{locations: locations}},function(err,doc){
+    			if (err) {
+		        	console.log(err)
+		            // If it failed, return error
+		            res.send(403);
+		        }
+		        else {
+		        	console.log(doc)
+		            // And forward to success page
+		            res.send(200);
 		        
-    // 			}
-    // 			});
-    // 		}else
-    // 		{
-    // 			console.log('push points');
-    // 			collection.update({username: userName},
-    // 			{$pushAll:{ "locations.0.points": locations.points}},function(err,doc){
-    // 			if (err) {
-		  //       	console.log(err)
-		  //           // If it failed, return error
-		  //           res.send(403);
-		  //       }
-		  //       else {
-		  //       	console.log(doc)
-		  //           // And forward to success page
-		  //           res.send(200);
-		  //       	}
-    // 			});
-    // 		}
-    // 	});
-    // }
+    			}
+    			});
+    		}else
+    		{
+    			console.log('push points');
+    			collection.update({username: userName},
+    			{$pushAll:{ "locations.0.points": locations.points}},function(err,doc){
+    			if (err) {
+		        	console.log(err)
+		            // If it failed, return error
+		            res.send(403);
+		        }
+		        else {
+		        	console.log(doc)
+		            // And forward to success page
+		            res.send(200);
+		        	}
+    			});
+    		}
+    	});
+    }
 });
 //     console.log('koniec');
 
