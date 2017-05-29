@@ -75,13 +75,15 @@ router.post('/get', function(req,res,next){
 	console.log(usernam);
 
 
-	collection.find( {"username":usernam},function(err,docs){
+	collection.find( {"username":usernam},function(err,out){
 		if(err != null)
 		{
 			//console.log(err);
 			res.sendStatus(404);
 		}else
 		{
+		console.log('no error');
+		var docs = out.toArray();
 		if(docs[0] != null && docs[0].locations != null){
 		var arrayLength = docs[0].locations.length;
 		for (var i = 0; i < arrayLength; i++) {
