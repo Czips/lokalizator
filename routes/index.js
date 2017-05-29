@@ -124,7 +124,7 @@ var user = new Promise(function(resolve,reject){
     		{
     			reject(err);
     		}else{
-    			resolve(doc);
+    			resolve(doc.toArray());
     		}
     	});
 });
@@ -136,7 +136,7 @@ var findLocations = new Promise(function (resolve, reject){
 			if(err){
 				reject(err);
 			}else{
-				resolve(doc);
+				resolve(doc.toArray());
 			}
 		}
 		);
@@ -146,7 +146,7 @@ var findLocations = new Promise(function (resolve, reject){
 console.log('start');
 
 user.then(function(doc){
-	console.log(doc);
+	//console.log(doc);
 	if(doc.length ==0){
     	console.log('insert user');
     	collection.insert({
