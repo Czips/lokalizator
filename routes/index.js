@@ -137,17 +137,17 @@ var user = new Promise(function(resolve,reject){
 });
 
 
-var findLocations = new Promise(function (resolve, reject){
-	collection.find({ "locations.0.Date": {$eq: locations.Date}},
-		function(err,doc){
-			if(err){
-				reject(err);
-			}else{
-				resolve(doc.toArray());
-			}
-		}
-		);
-});
+// var findLocations = new Promise(function (resolve, reject){
+// 	collection.find({ "locations.0.Date": {$eq: locations.Date}},
+// 		function(err,doc){
+// 			if(err){
+// 				reject(err);
+// 			}else{
+// 				resolve(doc.toArray());
+// 			}
+// 		}
+// 		);
+// });
 
 
 console.log('start');
@@ -176,48 +176,68 @@ user.then(function(doc){
     }
     else
     {
-    	findLocations.then(function(doc){
-    		
-    		//day not found
-    		if(doc.length ==0)
-    		{
-    			console.log('add locations');
-    			collection.update({username: userName},
-    			{$addToSet:{locations: locations}},function(err,doc){
+    	var added = false;
+    	for(location of doc[0].locations)
+    	{
+    		if(location.Date == locations.Date){
+    			console.log('match existing day');
+    			location.points = location.points.concat(locations.points);
+    			collection.update(
+    			{
+    				username: userName
+    			},
+    				{
+    					username: userName,
+    					locations: doc[0].locations
+    				},
+    				function(err,doc){
     			if (err) {
 		        	console.log(err)
 		            // If it failed, return error
 		            res.send(403);
+		            return;
 		        }
 		        else {
 		        	console.log(doc)
 		            // And forward to success page
 		            res.send(200);
-		        
+		        	return;
     			}
-    			});
-    		}else
-    		{
-    			console.log('push points');
-    			collection.update({username: userName},
-    			{$pushAll:{ "locations.0.points": locations.points}},function(err,doc){
+    			}
+    			);
+    			added= true;
+    		}
+    	}
+    	if(!added){
+    		console.log('add new day');
+    		doc[0].locations.push(locations);
+    	collection.update(
+    			{
+    				username: userName
+    			},
+    				{
+    					username: userName,
+    					locations: doc[0].locations},function(err,doc){
     			if (err) {
 		        	console.log(err)
 		            // If it failed, return error
 		            res.send(403);
+		            return;
 		        }
 		        else {
 		        	console.log(doc)
 		            // And forward to success page
 		            res.send(200);
-		        	}
-    			});
-    		}
-    	});
+		        	return;
+    			}
+    			}
+    			);
+    }
+
+
+
     }
 });
-//     console.log('koniec');
-
 });
 
 module.exports = router;
